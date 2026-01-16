@@ -25,6 +25,22 @@ const ReportUpdateForm = ({ initialData, handleInputChange, handleSubmit, onBack
         handleSubmit(formData);
     };
 
+    const formatDateTimeLocal = (val) => {
+        if (!val) return "";
+        try {
+            const date = new Date(val);
+            if (isNaN(date.getTime())) return "";
+            const Y = date.getFullYear();
+            const M = String(date.getMonth() + 1).padStart(2, '0');
+            const D = String(date.getDate()).padStart(2, '0');
+            const h = String(date.getHours()).padStart(2, '0');
+            const m = String(date.getMinutes()).padStart(2, '0');
+            return `${Y}-${M}-${D}T${h}:${m}`;
+        } catch {
+            return "";
+        }
+    };
+
     return (
         <main className="max-w-[1000px] mx-auto py-8 px-10 flex flex-col gap-2">
             {/* External Header Row */}
@@ -171,11 +187,11 @@ const ReportUpdateForm = ({ initialData, handleInputChange, handleSubmit, onBack
             )}
 
             {/* Dynamic Accordion List */}
-            <div className="flex flex-col gap-[1px]">
+            <div className="flex flex-col gap-[10px]">
                 {accordionItems.map((item) => (
-                    <div key={item.label} className="bg-white border border-slate-200 shadow-sm overflow-hidden translate-y-0 hover:border-slate-300 transition-colors">
+                    <div key={item.label} className="bg-white border border-slate-200 shadow-lg overflow-hidden translate-y-0 hover:border-slate-300 transition-colors">
                         <div
-                            className="flex items-center justify-between px-3 py-[4px] bg-white cursor-pointer select-none"
+                            className="flex items-center justify-between px-3 py-[8px] bg-white cursor-pointer select-none"
                             onClick={() => toggleSection(item.label)}
                         >
                             <span className="font-bold text-[15px] text-slate-700">{item.label}</span>
@@ -187,14 +203,56 @@ const ReportUpdateForm = ({ initialData, handleInputChange, handleSubmit, onBack
                         {openSections[item.label] && (
                             <div className="px-4 py-5 border-t border-slate-100 bg-[#fbfbfb] animate-in slide-in-from-top-1 duration-200">
                                 {item.label === "Review Date" ? (
-                                    <div className="max-w-[240px]">
-                                        <input
-                                            type="date"
-                                            name={item.dbName}
-                                            value={formData[item.dbName] ? formData[item.dbName].split('T')[0] : ""}
-                                            onChange={localInputChange}
-                                            className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
-                                        />
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 py-2">
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Date Sent to Social Worker</label>
+                                            <input
+                                                type="datetime-local"
+                                                name="Sent_to_Social_Worker"
+                                                value={formatDateTimeLocal(formData.Sent_to_Social_Worker)}
+                                                onChange={localInputChange}
+                                                className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Method</label>
+                                            <div className="relative">
+                                                <select
+                                                    name="Method"
+                                                    value={formData.Method || ""}
+                                                    onChange={localInputChange}
+                                                    className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white appearance-none"
+                                                >
+                                                    <option value=""></option>
+                                                    <option value="1">Email</option>
+                                                    <option value="2">Post</option>
+                                                    <option value="3">Hand Delivered</option>
+                                                </select>
+                                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                                    <Icons.ChevronDown />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Approved On</label>
+                                            <input
+                                                type="datetime-local"
+                                                name="Approved_on"
+                                                value={formatDateTimeLocal(formData.Approved_on)}
+                                                onChange={localInputChange}
+                                                className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Last Review Date</label>
+                                            <input
+                                                type="date"
+                                                name="Last_ReviewDate"
+                                                value={formData.Last_ReviewDate ? formData.Last_ReviewDate.split('T')[0] : ""}
+                                                onChange={localInputChange}
+                                                className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
+                                            />
+                                        </div>
                                     </div>
                                 ) : item.label === "Signature" ? (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 py-2">

@@ -161,14 +161,56 @@ const ReportForm = ({ formData, handleInputChange, handleSubmit, onBack, accordi
                         {openSections[item.label] && (
                             <div className="px-4 py-5 border-t  border-slate-100 bg-[#fbfbfb] animate-in slide-in-from-top-1 duration-200">
                                 {item.label === "Review Date" ? (
-                                    <div className="max-w-[240px]">
-                                        <input
-                                            type="date"
-                                            name={item.dbName}
-                                            value={formData[item.dbName]}
-                                            onChange={handleInputChange}
-                                            className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
-                                        />
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 py-2">
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Date Sent to Social Worker</label>
+                                            <input
+                                                type="datetime-local"
+                                                name="Sent_to_Social_Worker"
+                                                value={formData.Sent_to_Social_Worker}
+                                                onChange={handleInputChange}
+                                                className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Method</label>
+                                            <div className="relative">
+                                                <select
+                                                    name="Method"
+                                                    value={formData.Method}
+                                                    onChange={handleInputChange}
+                                                    className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white appearance-none"
+                                                >
+                                                    <option value=""></option>
+                                                    <option value="1">Email</option>
+                                                    <option value="2">Post</option>
+                                                    <option value="3">Hand Delivered</option>
+                                                </select>
+                                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                                    <Icons.ChevronDown />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Approved On</label>
+                                            <input
+                                                type="datetime-local"
+                                                name="Approved_on"
+                                                value={formData.Approved_on}
+                                                onChange={handleInputChange}
+                                                className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            <label className="text-[13px] font-bold text-slate-500">Last Review Date</label>
+                                            <input
+                                                type="date"
+                                                name="Last_ReviewDate"
+                                                value={formData.Last_ReviewDate}
+                                                onChange={handleInputChange}
+                                                className="w-full border border-slate-200 rounded-[2px] px-3 py-1.5 text-[15px] outline-none focus:border-blue-400 h-[40px] bg-white"
+                                            />
+                                        </div>
                                     </div>
                                 ) : item.label === "Signature" ? (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 py-2">

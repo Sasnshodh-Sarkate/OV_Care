@@ -54,6 +54,8 @@ const App = () => {
     Is_Fin: false,
     Is_Simple: false,
     Method: "",
+    Sent_to_Social_Worker: "",
+    Approved_on: "",
     // Sub-categories for "This is what makes me"
     twmm_Giggle: "",
     twmm_Happy: "",
