@@ -11,7 +11,11 @@ client/build/
 
 # Environment Variables
 .env
-server/.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
 
 # IDE / Editor Files
 .vscode/
