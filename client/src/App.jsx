@@ -140,7 +140,7 @@ const App = () => {
 
   const fetchReports = async () => {
     try {
-      const response = await fetch('/api/reports');
+      const response = await fetch('http://194.163.173.37:8801/api/reports');
       if (response.ok) {
         const data = await response.json();
         setReports(data);
@@ -574,7 +574,7 @@ const App = () => {
     };
 
     try {
-      const response = await fetch('/api/reports', {
+      const response = await fetch('http://194.163.173.37:8801/api/reports', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData),
@@ -711,7 +711,7 @@ const App = () => {
     };
 
     try {
-      const response = await fetch(`/api/reports/${submissionData.Id}`, {
+      const response = await fetch(`http://194.163.173.37:8801/api/reports/${submissionData.Id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData),
